@@ -11,6 +11,11 @@ use App\Http\Requests;
 
 class CategoriesController extends Controller
 {
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
     public function new_category(Request $request) {
 
 	    if($request->isMethod('post'))
