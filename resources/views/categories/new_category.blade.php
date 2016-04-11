@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Laravel</title>
+@extends('master')
+@section('header')
+<script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js') }}">
+$(document).ready(function() {
+    CKEDITOR.replace( 'ckeditor',
+    {
+        customConfig : 'config.js',
+        toolbar : 'simple'
+    })
+});
+</script>
+@endsection
+@section('title','Nowa kategoria')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    </head>
-    <body>
-        @include('navigation')
-        @yield('navigation')
-        <div class="container">
-            <div class="content">
-                <div class="title">Dodawanie nowego zadania</div>
-            </div>
-        </div>
-    </body>
-</html>
+@section('content')
+    <h4>Dodawanie nowej kategorii</h4>
+    <form method="POST">
+            <label>Nazwa kategorii</label>
+            <input type="text" class="form-control" name="category_name" placeholder="Nazwa kategorii" style="width: 300px;" required />
+            <label>Opis</label>
+            <textarea class="ckeditor" name="description" placeholder="Opis kategorii"></textarea>
+            <br />
+            <input type="submit" value="Zapisz kategorię" class="btn btn-sm btn-primary">
+    </form>
+@endsection

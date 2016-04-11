@@ -8,6 +8,16 @@ class Task extends Model
 {
     protected $table = 'tasks';
 	protected $primaryKey = 'id';
-	public $timestamps = false;
 
+	public function category() {
+		return $this->belongsTo('App\Category');
+	}
+
+	public function level() {
+		return $this->belongsTo('App\Level');
+	}
+
+	public function tags() {
+		return $this->belongsToMany('App\Tag');
+	}
 }

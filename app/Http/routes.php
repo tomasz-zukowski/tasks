@@ -11,10 +11,18 @@
 |
 */
 
-Route::get('/', function () {
+Route::any('/', ['as'=>'home', function () {
     return view('welcome');
-});
+}]);
 
+Route::any('/task/categories', ['as'=>'categories', 'uses'=>'TasksController@categories']);
+Route::any('/task/list/{id}', ['as'=>'tasks_from_category', 'uses'=>'TasksController@fromCategory']);
+Route::any('/task/details/{id}', ['as'=>'task_details', 'uses'=>'TasksController@details']);
+Route::any('/task/new_task', ['as'=>'new_task', 'uses'=>'TasksController@new_task']);
+Route::any('/task/edit/{id}', ['as'=>'edit_task', 'uses'=>'TasksController@edit_task']);
+
+Route::any('/category/new_category', ['as'=>'new_category', 'uses'=>'CategoriesController@new_category']);
+Route::any('/category/edit_category/{id}', ['as'=>'edit_category', 'uses'=>'CategoriesController@edit_category']);
 /*
 |--------------------------------------------------------------------------
 | Application Routes

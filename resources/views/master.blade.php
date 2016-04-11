@@ -2,10 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Laravel</title>
+        <title>
+        @yield('title')
+        </title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <script type="text/javascript" src="{{ asset('js/jquery-1.12.2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+        @yield('header')
     </head>
     <body>
         @include('navigation')
@@ -13,40 +19,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="well">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h4>Lista kategorii</h4>
-                                <div class="row">
-                                    <div class="col-sm-12 text-right">
-                                        <a class="btn btn-primary btn-xs" href="{{ route('new_category') }}">Nowa kategoria +</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table class="table table-responsive table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nazwa kategorii</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($categories as $category)
-                                            <tr>
-                                                <td>
-                                                    <a href="{{ route('tasks_from_category',[$category->id]) }}">{{ $category->name }}</a>
-                                                </td>
-                                                <td class="text-right">
-                                                    <a class="btn btn-xs btn-warning glyphicon-pencil" href="{{ route('edit_category',$category->id) }}">Edit</a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @section('head')
+                            @endsection
+                            @yield('head')
+                        </div>
+                        <div class="panel-body">
+                            @section('content')
+                                <h4>Część treści</h4>
+                            @endsection
+                            @yield('content')
+                        </div>
+                        <div class="panel-footer">
+                            @yield('foot')
                         </div>
                     </div>
                 </div>

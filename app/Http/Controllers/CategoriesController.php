@@ -17,11 +17,31 @@ class CategoriesController extends Controller
 	    {
 		    $category = new Category;
 		    $category->name = $request->input('category_name');
+		    $category->description = $request->input('description');
 		    $category->save();
 
-		    return response()->view('categories.new_category');
+		    return redirect('task/categories');
 	    }
 
 	    return view('categories.new_category');
     }
+
+	public function edit_category(Request $request, $id) {
+
+		$category = Category::find($id);
+
+
+		if($request->isMethod('post'))
+		{
+			$category->name = $request->input('category_name');
+			$category->description = $request->input('description');
+			$category->save();
+
+			return redirect('task/categories');
+		}
+
+		return view('categories.edit_category',['category'=>$category]);
+	}
+
+
 }
