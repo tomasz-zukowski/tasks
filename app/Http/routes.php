@@ -11,18 +11,6 @@
 |
 */
 
-Route::any('/', ['as'=>'home', 'middleware' => 'web', function () {
-    return view('welcome');
-}]);
-
-Route::any('/task/categories', ['as'=>'categories', 'middleware' => 'web', 'uses'=>'TasksController@categories']);
-Route::any('/task/list/{id}', ['as'=>'tasks_from_category', 'middleware' => 'web', 'uses'=>'TasksController@fromCategory']);
-Route::any('/task/details/{id}', ['as'=>'task_details', 'middleware' => 'web', 'uses'=>'TasksController@details']);
-Route::any('/task/new_task', ['as'=>'new_task', 'middleware' => 'web', 'uses'=>'TasksController@new_task']);
-Route::any('/task/edit/{id}', ['as'=>'edit_task', 'middleware' => 'web', 'uses'=>'TasksController@edit_task']);
-
-Route::any('/category/new_category', ['as'=>'new_category', 'middleware' => 'web', 'uses'=>'CategoriesController@new_category']);
-Route::any('/category/edit_category/{id}', ['as'=>'edit_category', 'middleware' => 'web', 'uses'=>'CategoriesController@edit_category']);
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -34,12 +22,18 @@ Route::any('/category/edit_category/{id}', ['as'=>'edit_category', 'middleware' 
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
-
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
+	Route::any('/', ['as'=>'home', function () {
+		return view('welcome');
+	}]);
     Route::get('/home', 'HomeController@index');
+	Route::any('/task/categories', ['as'=>'categories', 'uses'=>'TasksController@categories']);
+	Route::any('/task/list/{id}', ['as'=>'tasks_from_category', 'uses'=>'TasksController@fromCategory']);
+	Route::any('/task/details/{id}', ['as'=>'task_details', 'uses'=>'TasksController@details']);
+	Route::any('/task/new_task', ['as'=>'new_task', 'uses'=>'TasksController@new_task'])->middleware('isAdmin');
+	Route::any('/task/edit/{id}', ['as'=>'edit_task', 'uses'=>'TasksController@edit_task'])->middleware('isAdmin');
+
+	Route::any('/category/new_category', ['as'=>'new_category', 'uses'=>'CategoriesController@new_category'])->middleware('isAdmin');
+	Route::any('/category/edit_category/{id}', ['as'=>'edit_category', 'uses'=>'CategoriesController@edit_category'])->middleware('isAdmin');
 });

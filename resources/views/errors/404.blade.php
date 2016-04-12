@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
+        <title>404. Nie znaleziono</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Wracamy za chwilkę.</div>
+                <div class="title">Nie znaleziono.</div>
             </div>
         </div>
     </body>
