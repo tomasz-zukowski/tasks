@@ -4,7 +4,7 @@
         <title>401. You shall not pass.</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+        <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
         <style>
             html, body {
                 height: 100%;
@@ -40,7 +40,8 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Brak dostepu.</div>
+                <img src="{{ asset('images/401.png') }}" class="error-img">
+                <div class="title">401. You shall not pass!</div>
             </div>
         </div>
     </body>

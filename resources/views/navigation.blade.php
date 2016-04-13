@@ -8,7 +8,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
              @if (Auth::guest())
              {{Auth::user()}}
-             <ul class="nav navbar-nav">
+             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ url('/login') }}">Zaloguj się</a></li>
                 <li><a href="{{ url('/register') }}">Zarejestruj się</a></li>
             </ul>
@@ -18,6 +18,7 @@
                 <li><a href="{{ route('new_task') }}">Nowe zadanie</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ route('show_users_list') }}"><i class="fa fa-users"></i> Użytkownicy</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         {{ Auth::user()->name }} <span class="caret"></span>

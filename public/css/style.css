@@ -63,6 +63,10 @@ div.star1 {
     font-weight: bold;
 }
 
+.error-img {
+    width: 50%;
+}
+
 /** overrided **/
 .list-group a {
     text-decoration: none;

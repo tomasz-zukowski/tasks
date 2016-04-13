@@ -36,4 +36,6 @@ Route::group(['middleware' => 'web'], function () {
 
 	Route::any('/category/new_category', ['as'=>'new_category', 'uses'=>'CategoriesController@new_category'])->middleware('isAdmin');
 	Route::any('/category/edit_category/{id}', ['as'=>'edit_category', 'uses'=>'CategoriesController@edit_category'])->middleware('isAdmin');
+	Route::any('/users/lists/{id?}', ['as'=>'show_users_list', 'uses'=>'UsersController@lists'])->middleware('isAdmin');
+	Route::any('/users/details/{id?}', ['as'=>'show_user_details', 'uses'=>'UsersController@details'])->middleware('isAdmin');
 });

@@ -4,7 +4,7 @@
         <title>Be right back.</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+        <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
         <style>
             html, body {
                 height: 100%;
