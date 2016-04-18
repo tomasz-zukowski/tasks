@@ -29,9 +29,11 @@
                         {!! substr($task->target,0,300) !!}<a href="{{ route('task_details', [$task->id]) }}">... Czytaj dalej</a>
                         @endif
                         <span class="tags italic">
-                            @foreach($task->tags as $tag)
+                            @forelse($task->tags as $tag)
                                 <span>{{ $tag->name }}</span>
-                            @endforeach
+                            @empty
+                                Brak tagów
+                            @endforelse
                         </span>
                     </p>
                 </li>

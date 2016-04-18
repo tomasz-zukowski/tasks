@@ -38,6 +38,7 @@ $(document).ready(function() {
 @section('content')
 <h4>Edycja zadania</h4>
 <form method="POST" enctype="multipart/form-data" autocomplete="off">
+    {!! csrf_field() !!}
     <label>Kategoria</label>
     <select name="category" class="form-control input-sm" style="width: 300px;" required>
     @foreach($categories as $category)

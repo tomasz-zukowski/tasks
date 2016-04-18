@@ -67,6 +67,10 @@ div.star1 {
     width: 50%;
 }
 
+.img-target {
+    max-width: 100%;
+}
+
 /** overrided **/
 .list-group a {
     text-decoration: none;

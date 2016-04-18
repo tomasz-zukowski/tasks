@@ -15,6 +15,7 @@ $(document).ready(function() {
 @section('content')
     <h4>Dodawanie nowej kategorii</h4>
     <form method="POST">
+        {!! csrf_field() !!}
             <label>Nazwa kategorii</label>
             <input type="text" class="form-control" name="category_name" placeholder="Nazwa kategorii" style="width: 300px;" required />
             <label>Opis</label>

@@ -32,15 +32,26 @@
         {!! $task->description !!}
         <br />
         <span class="tags italic">
-            @foreach($task->tags as $tag)
+            @forelse($task->tags as $tag)
                 <span>{{ $tag->name }}</span>
-            @endforeach
+            @empty
+                Brak tagów
+            @endforelse
         </span>
     </div>
     <div class="col-sm-5">
         <h4>Cel zadania:</h4>
         @if(!empty($task->target))
         <p>{!! $task->target !!}</p>
+            @if(!empty($files))
+                @foreach($files as $f)
+                    @if(!is_dir($f))
+                        <a href="{{asset('uploads/tasks/'.$task->id.'/'.$f)}}">
+                            <img class="img-target img-thumbnail" src="{{ asset('uploads/tasks/'.$task->id.'/'.$f) }}"/>
+                        </a>
+                    @endif
+                @endforeach
+            @endif
         @else
         <p>Brak szczegółów odnośnie celu zadania. Przeczytaj uważnie opis!</p>
         @endif

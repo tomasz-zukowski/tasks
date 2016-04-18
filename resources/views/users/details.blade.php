@@ -1,6 +1,8 @@
 @extends('master')
 @section('title','Szczegóły użytkownika')
+@section('header')
 
+@endsection
 @section('content')
     <h4>Widok szczegółowy użytkownika: </h4>
     <div class="row">

@@ -46,8 +46,9 @@ class TasksController extends Controller
 	public function details($id)
 	{
 		$task = Task::find($id);
+		$files = @scandir('uploads/tasks/'.$task->id);
 
-		return view('tasks.details', ['id' => $id, 'task'=>$task]);
+		return view('tasks.details', ['id' => $id, 'task'=>$task, 'files'=>$files]);
 	}
 
 	/**
@@ -72,26 +73,28 @@ class TasksController extends Controller
 			$task->category()->associate(Category::find($request->input('category')));
 			$task->save();
 
-
-			$tags = explode(" ",trim($request->input('tags')));
-			$task->tags()->detach();
-
-			foreach ($tags as $tag)
+			if(!empty($request->input('tags')))
 			{
-				$sample_tag = Tag::where('name', $tag)->first();
-				if(empty($sample_tag))
-				{
-					$new_tag       = new Tag();
-					$new_tag->name = $tag;
-					$new_tag->save();
-					$t = $new_tag;
-				}
-				else
-				{
-					$t = Tag::find($sample_tag['id']);
-				}
+				$tags = explode(" ", trim($request->input('tags')));
+				$task->tags()->detach();
 
-				$task->tags()->attach($t->id);
+				foreach ($tags as $tag)
+				{
+					$sample_tag = Tag::where('name', $tag)->first();
+					if(empty($sample_tag))
+					{
+						$new_tag       = new Tag();
+						$new_tag->name = $tag;
+						$new_tag->save();
+						$t = $new_tag;
+					}
+					else
+					{
+						$t = Tag::find($sample_tag['id']);
+					}
+
+					$task->tags()->attach($t->id);
+				}
 			}
 
 			return redirect()->route('task_details',$id);
@@ -108,6 +111,7 @@ class TasksController extends Controller
 
 		if($request->isMethod('post'))
 		{
+
 			$task              = new Task();
 			$task->title       = $request->input('title');
 			$task->active      = 1;
@@ -119,24 +123,36 @@ class TasksController extends Controller
 			$task->category()->associate(Category::find($request->input('category')));
 			$task->save();
 
-			$tags = explode(" ",trim($request->input('tags')));
-
-			foreach ($tags as $tag)
+			if(!empty($request->input('tags')))
 			{
-				$sample_tag = Tag::where('name', $tag)->first();
-				if(empty($sample_tag))
-				{
-					$new_tag       = new Tag();
-					$new_tag->name = $tag;
-					$new_tag->save();
-					$t = $new_tag;
-				}
-				else
-				{
-					$t = Tag::find($sample_tag['id']);
-				}
+				$tags = explode(" ", trim($request->input('tags')));
 
-				$task->tags()->attach($t->id);
+				foreach ($tags as $tag)
+				{
+					$sample_tag = Tag::where('name', $tag)->first();
+					if(empty($sample_tag))
+					{
+						$new_tag       = new Tag();
+						$new_tag->name = $tag;
+						$new_tag->save();
+						$t = $new_tag;
+					}
+					else
+					{
+						$t = Tag::find($sample_tag['id']);
+					}
+
+					$task->tags()->attach($t->id);
+				}
+			}
+			else
+
+			if($request->hasFile('target_file'))
+			{
+				if($request->file('target_file')->isValid())
+				{
+					$request->file('target_file')->move('uploads/tasks/'.$task->id,'cel_zadania.'.$request->file('target_file')->getClientOriginalExtension());
+				}
 			}
 		}
 
